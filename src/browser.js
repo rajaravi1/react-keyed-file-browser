@@ -47,7 +47,8 @@ class RawFileBrowser extends React.Component {
     showActionBar: PropTypes.bool.isRequired,
     canFilter: PropTypes.bool.isRequired,
     showFoldersOnFilter: PropTypes.bool,
-    noFilesMessage: PropTypes.string,
+    noFilesMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    noMatchingFilesMessage: PropTypes.func,
     getFilteredFiles: PropTypes.func,
     flattenFilterResults: PropTypes.bool,
     assumeOpenOnFilter: PropTypes.bool,
@@ -117,6 +118,7 @@ class RawFileBrowser extends React.Component {
     canFilter: true,
     showFoldersOnFilter: false,
     noFilesMessage: 'No files.',
+    noMatchingFilesMessage: (filter) => `No files matching "${filter}".`,
     getFilteredFiles: DefaultFilterLogic,
     flattenFilterResults: true,
     assumeOpenOnFilter: true,
@@ -722,7 +724,7 @@ class RawFileBrowser extends React.Component {
             contents = (
               <tr>
                 <td colSpan={100}>
-                  No files matching "{this.state.nameFilter}".
+                  {this.props.noMatchingFilesMessage(this.state.nameFilter)}
                 </td>
               </tr>
             )
@@ -780,9 +782,9 @@ class RawFileBrowser extends React.Component {
       case 'list':
         if (!contents.length) {
           if (this.state.nameFilter) {
-            contents = (<p className="empty">No files matching "{this.state.nameFilter}"</p>)
+            contents = (<p className="empty">{this.props.noMatchingFilesMessage(this.state.nameFilter)}</p>)
           } else {
-            contents = (<p className="empty">No files.</p>)
+            contents = (<p className="empty">{this.props.noFilesMessage}</p>)
           }
         } else {
           let more
