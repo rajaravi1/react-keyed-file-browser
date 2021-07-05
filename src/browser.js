@@ -136,7 +136,11 @@ class RawFileBrowser extends React.Component {
     filterRenderer: DefaultFilter,
     filterRendererProps: {},
     fileRenderer: TableFile,
-    fileRendererProps: {},
+    fileRendererProps: {
+      modifiedDateTime: {
+        formats: ['@distanceToNow'],
+      },
+    },
     folderRenderer: TableFolder,
     folderRendererProps: {},
     detailRenderer: DefaultDetail,
@@ -617,6 +621,8 @@ class RawFileBrowser extends React.Component {
     } = this.props
     const browserProps = this.getBrowserProps()
     let renderedFiles = []
+
+    console.log({ fileRendererProps })
 
     files.map((file) => {
       const thisItemProps = {
