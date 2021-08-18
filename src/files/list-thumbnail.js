@@ -109,6 +109,7 @@ class RawListThumbnailFile extends BaseFile {
           dragover: isOver,
           selected: isSelected,
         })}
+        id={browserProps.generateId && browserProps.generateId(this.props.fileKey)}
         onDoubleClick={this.handleItemDoubleClick}
         {...rowProps}
       >

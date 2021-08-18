@@ -56,6 +56,7 @@ class RawFileBrowser extends React.Component {
 
     group: PropTypes.func.isRequired,
     sort: PropTypes.func.isRequired,
+    generateId: PropTypes.func,
 
     icons: PropTypes.shape({
       Folder: PropTypes.element,
@@ -127,6 +128,7 @@ class RawFileBrowser extends React.Component {
 
     group: GroupByFolder,
     sort: SortByName,
+    generateId: undefined,
 
     nestChildren: false,
     renderStyle: 'table',
@@ -525,6 +527,7 @@ class RawFileBrowser extends React.Component {
       confirmMultipleDeletionRenderer: this.props.confirmMultipleDeletionRenderer,
       icons: this.props.icons,
       assumeOpenOnFilter: this.props.assumeOpenOnFilter,
+      generateId: this.props.generateId,
 
       // browser state
       openFolders: this.state.openFolders,
