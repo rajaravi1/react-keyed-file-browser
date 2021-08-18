@@ -52,6 +52,7 @@ class RawFileBrowser extends React.Component {
     getFilteredFiles: PropTypes.func,
     flattenFilterResults: PropTypes.bool,
     assumeOpenOnFilter: PropTypes.bool,
+    searchResultsPerPage: PropTypes.number,
 
     group: PropTypes.func.isRequired,
     sort: PropTypes.func.isRequired,
@@ -122,6 +123,7 @@ class RawFileBrowser extends React.Component {
     getFilteredFiles: DefaultFilterLogic,
     flattenFilterResults: true,
     assumeOpenOnFilter: true,
+    searchResultsPerPage: SEARCH_RESULTS_PER_PAGE,
 
     group: GroupByFolder,
     sort: SortByName,
@@ -170,7 +172,7 @@ class RawFileBrowser extends React.Component {
     actionTargets: [],
 
     nameFilter: '',
-    searchResultsShown: SEARCH_RESULTS_PER_PAGE,
+    searchResultsShown: this.props.searchResultsPerPage,
 
     previewFile: null,
 
@@ -401,7 +403,7 @@ class RawFileBrowser extends React.Component {
   handleShowMoreClick = (event) => {
     event.preventDefault()
     this.setState(prevState => ({
-      searchResultsShown: prevState.searchResultsShown + SEARCH_RESULTS_PER_PAGE,
+      searchResultsShown: prevState.searchResultsShown + this.props.searchResultsPerPage,
     }))
   }
 
@@ -507,7 +509,7 @@ class RawFileBrowser extends React.Component {
   updateFilter = (newValue) => {
     this.setState({
       nameFilter: newValue,
-      searchResultsShown: SEARCH_RESULTS_PER_PAGE,
+      searchResultsShown: this.props.searchResultsPerPage,
     })
   }
 
