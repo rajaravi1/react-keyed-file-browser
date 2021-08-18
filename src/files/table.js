@@ -77,6 +77,7 @@ class RawTableFile extends BaseFile {
           dragover: isOver,
           selected: isSelected,
         })}
+        id={browserProps.generateId && browserProps.generateId(this.props.fileKey)}
         onClick={this.handleItemClick}
         onDoubleClick={this.handleItemDoubleClick}
       >

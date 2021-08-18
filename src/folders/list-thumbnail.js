@@ -105,6 +105,7 @@ class RawListThumbnailFolder extends BaseFolder {
           dragover: isOver,
           selected: isSelected,
         })}
+        id={browserProps.generateId && browserProps.generateId(this.props.fileKey)}
         onClick={this.handleFolderClick}
         onDoubleClick={this.handleFolderDoubleClick}
       >
