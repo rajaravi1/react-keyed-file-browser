@@ -749,11 +749,12 @@ class RawFileBrowser extends React.Component {
             contents = contents.slice(0, this.state.searchResultsShown)
             if (numFiles > contents.length) {
               contents.push(
-                <tr key="show-more">
+                <tr key="show-more" className="show-more-row">
                   <td colSpan={100}>
                     <a
                       onClick={this.handleShowMoreClick}
                       href="#"
+                      className="show-more"
                     >
                       Show more results
                     </a>
@@ -802,6 +803,7 @@ class RawFileBrowser extends React.Component {
                 <a
                   onClick={this.handleShowMoreClick}
                   href="#"
+                  className="show-more"
                 >
                   Show more results
                 </a>
