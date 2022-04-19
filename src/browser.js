@@ -19,7 +19,7 @@ import { GroupByFolder } from './groupers'
 import { SortByName } from './sorters'
 
 import { isFolder } from './utils'
-import { DefaultAction } from './actions'
+import { DefaultAction, DefaultActionBar } from './actions'
 
 const SEARCH_RESULTS_PER_PAGE = 20
 const regexForNewFolderOrFileSelection = /.*\/__new__[/]?$/gm
@@ -90,6 +90,7 @@ class RawFileBrowser extends React.Component {
     detailRenderer: PropTypes.func,
     detailRendererProps: PropTypes.object,
     actionRenderer: PropTypes.func,
+    actionBarRenderer: PropTypes.func,
     confirmDeletionRenderer: PropTypes.func,
     confirmMultipleDeletionRenderer: PropTypes.func,
 
@@ -151,6 +152,7 @@ class RawFileBrowser extends React.Component {
     detailRenderer: DefaultDetail,
     detailRendererProps: {},
     actionRenderer: DefaultAction,
+    actionBarRenderer: DefaultActionBar,
     confirmDeletionRenderer: DefaultConfirmDeletion,
     confirmMultipleDeletionRenderer: MultipleConfirmDeletion,
 
@@ -563,6 +565,7 @@ class RawFileBrowser extends React.Component {
     const {
       icons, canFilter,
       filterRendererProps, filterRenderer: FilterRenderer,
+      actionBarRenderer: ActionBarRenderer,
       actionRenderer: ActionRenderer,
       onCreateFolder, onRenameFile, onRenameFolder,
       onDeleteFile, onDeleteFolder, onDownloadFile,
@@ -614,12 +617,7 @@ class RawFileBrowser extends React.Component {
       />
     )
 
-    return (
-      <div className="action-bar">
-        {filter}
-        {actions}
-      </div>
-    )
+    return <ActionBarRenderer filter={filter} actions={actions} />
   }
 
   renderFiles(files, depth) {
